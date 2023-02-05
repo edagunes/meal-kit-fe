@@ -11,28 +11,25 @@ import {
     Button,
   } from '@mantine/core';
   
-  export function AuthLogin() {
+  export function AuthSignUp() {
     return (
         <div>
             <Container size={420} my={40}>
-                <Title
-                align="center"
+                <Title align="center"
                 sx={(theme) => ({ fontFamily: `Greycliff CF, ${theme.fontFamily}`, fontWeight: 900 })}
                 >
-                Welcome back!
+                Kendini Bize Tanıt!
                 </Title>
         
                 <Paper withBorder shadow="md" p={30} mt={30} radius="md">
                 <TextInput label="Email" placeholder="you@gmail.com" required />
-                <PasswordInput label="Password" placeholder="Your password" required mt="md" />
+                <PasswordInput label="Şifre" placeholder="Şifreniz" required mt="md" />
+                <PasswordInput label="Şifre Tekrarı" placeholder="Şifreniz" required mt="md" />
                 <Group position="apart" mt="lg">
-                    <Checkbox label="Remember me" sx={{ lineHeight: 1 }} />
-                    <Anchor href="/forgetpass" onClick={(event) => event.preventDefault()} size="sm">
-                    Forgot password?
-                    </Anchor>
+                    <Checkbox label="Beni hatırla" sx={{ lineHeight: 1 }} />
                 </Group>
                 <Button fullWidth mt="xl">
-                    Sign in
+                    Kayıt ol
                 </Button>
                 </Paper>
             </Container>

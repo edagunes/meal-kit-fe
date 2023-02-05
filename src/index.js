@@ -6,6 +6,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Home from './pages/Home'
 import Login from './pages/Login'
+import SignUp from './pages/SignUp'
+import ForgetPass from './pages/ForgetPass'
+import Cuisine from './pages/Cuisine'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,6 +17,9 @@ root.render(
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/login" element={<Login/> }/>
+        <Route path="/signup" element={<SignUp/> }/>
+        <Route path="/forgetpass" element={<ForgetPass /> }/>
+        <Route path="/cuisine" element={<Cuisine /> }/>
       </Routes>
     </BrowserRouter>
     <App />

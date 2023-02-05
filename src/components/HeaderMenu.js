@@ -1,3 +1,4 @@
+
 import {
   createStyles,
   Menu,
@@ -7,11 +8,14 @@ import {
   Group,
   Button,
   Burger,
-  Image
+  Image,
+  Divider,
+  Avatar,
+  Drawer
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { MantineLogo } from '@mantine/ds';
-import { IconHome, IconChevronDown } from '@tabler/icons-react';
+import { IconHome, IconChevronDown, IconPlant, IconDropCircle, IconBreadOff, IconMilkOff, IconCarrot, } from '@tabler/icons-react';
+import { useState } from 'react';
 import mainLogo from '../logo.png'
 
 const HEADER_HEIGHT = 80;
@@ -58,49 +62,88 @@ const useStyles = createStyles((theme) => ({
 
 const links = [
   {
-    link: 1,
-    label: 'Menu'
+    link: '/',
+    label: 'Anasayfa'
   },
   {
-    link: 4,
+    link: 2,
     label: 'Mutfaklar',
     links: [
       {
+        link: 3,
+        label: 'Avrupa Mutfağı'
+      },
+      {
+        link: 4,
+        label: 'Güney Amerika Mutfağı'
+      },
+      {
         link: 5,
-        label: 'Uzak Doğu Mutfağı'
+        label: 'Güney Asya Mutfağı'
       },
       {
         link: 6,
+        label: 'İtalya Mutfağı'
+      },
+      {
+        link: 7,
+        label: 'Kuzey Amerika Mutfağı'
+      },
+      {
+        link: 8,
         label: 'Meksika Mutfağı'
       },
       {
-        link: 6,
+        link: 9,
         label: 'Türk Mutfağı'
+      },
+      {
+        link: 10,
+        label: 'Uzak Doğu Mutfağı'
       }
     ]
   },
   {
-    link: 7,
+    link: 3,
     label: 'Özel Beslenme',
     links: [
       {
-        link: 8,
-        label: 'Vegan'
+        link: 1,
+        label: 'Glutensiz',
+        icon: <IconBreadOff size={14} />
       },
       {
-        link: 9,
-        label: 'Vejetaryen'
+        link: 2,
+        label: 'Ketojenik',
+        icon: <IconDropCircle size={14} />
+      },
+      {
+        link: 3,
+        label: 'Laktozsuz',
+        icon: <IconMilkOff size={14} />
+      },
+      {
+        link: 4,
+        label: 'Vegan',
+        icon: <IconPlant size={14} />
+      },
+      {
+        link: 5,
+        label: 'Vejetaryen',
+        icon: <IconCarrot size={14} />
       }
     ]
   }
 ]
 
 export function HeaderMenu() {
+  const [ isAut, setIsAut ] = useState(true)
+  const [ drawerOpen, setDrawerOpen] = useState(false);
   const { classes, theme } = useStyles();
   const [opened, { toggle }] = useDisclosure(false);
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
-      <Menu.Item key={item.link}>{item.label}</Menu.Item>
+      <Menu.Item icon={item.icon} key={item.link}>{item.label}</Menu.Item>
     ));
 
     if (menuItems) {
@@ -146,11 +189,29 @@ export function HeaderMenu() {
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>
-        <Group>
-          <Button component="a" rel="noopener noreferrer" href="/login" color="teal" variant="light">Log in</Button>
-          <Button color="teal" >Sign up</Button>
-        </Group>
+        { !isAut && 
+          <Group>
+            <Button component="a" rel="noopener noreferrer" href="/login" color="teal" variant="light">Log in</Button>
+            <Button component="a" rel="noopener noreferrer" href="/signup" color="teal" >Sign up</Button>
+          </Group>
+        }
+        { isAut &&
+          <Group>
+            <Avatar color="green" />
+            <Button onClick={() => setDrawerOpen(true)} color="teal">Sepet</Button>
+          </Group>
+        }
       </Container>
+      <Drawer
+        opened={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        title="Register"
+        padding="lg"
+        size="lg"
+        position="right"
+      >
+        {/* Drawer content */}
+      </Drawer>
     </Header>
   );
 }
