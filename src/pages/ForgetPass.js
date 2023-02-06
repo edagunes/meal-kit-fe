@@ -1,15 +1,15 @@
+import { AuthForgetPass } from "../components/AuthForgetPass";
 import { FooterSocial } from "../components/FooterSocial"
 import { HeaderMenu } from "../components/HeaderMenu"
-import { MealCard } from "../components/MealCard";
 
-const Cuisine = () => {
+const ForgetPass = () => {
     return(
         <>
             <HeaderMenu />
-            <MealCard />
+            <AuthForgetPass />
             <FooterSocial />
         </>
     )
 }
 
-export default Cuisine;
+export default ForgetPass;
