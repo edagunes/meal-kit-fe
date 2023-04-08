@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import {
     TextInput,
     PasswordInput,
@@ -19,20 +20,20 @@ import {
                 align="center"
                 sx={(theme) => ({ fontFamily: `Greycliff CF, ${theme.fontFamily}`, fontWeight: 900 })}
                 >
-                Welcome back!
+                Hoşgeldiniz!
                 </Title>
         
                 <Paper withBorder shadow="md" p={30} mt={30} radius="md">
                 <TextInput label="Email" placeholder="you@gmail.com" required />
-                <PasswordInput label="Password" placeholder="Your password" required mt="md" />
+                <PasswordInput label="Şifre" placeholder="Şifreniz" required mt="md" />
                 <Group position="apart" mt="lg">
-                    <Checkbox label="Remember me" sx={{ lineHeight: 1 }} />
-                    <Anchor href="/forgetpass" onClick={(event) => event.preventDefault()} size="sm">
-                    Forgot password?
+                    <Checkbox label="Beni Hatırla" sx={{ lineHeight: 1 }} />
+                    <Anchor component={Link} to="/forgetpass" size="sm">
+                    Şifreni mi unuttun?
                     </Anchor>
                 </Group>
                 <Button fullWidth mt="xl">
-                    Sign in
+                    Giriş
                 </Button>
                 </Paper>
             </Container>

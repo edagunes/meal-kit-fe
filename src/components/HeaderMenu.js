@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import {
   createStyles,
   Menu,
@@ -9,7 +10,7 @@ import {
   Button,
   Burger,
   Image,
-  Divider,
+  Text,
   Avatar,
   Drawer
 } from '@mantine/core';
@@ -66,7 +67,7 @@ const links = [
     label: 'Anasayfa'
   },
   {
-    link: 2,
+    link: '/cuisine',
     label: 'Mutfaklar',
     links: [
       {
@@ -104,7 +105,7 @@ const links = [
     ]
   },
   {
-    link: 3,
+    link: '/cuisine',
     label: 'Özel Beslenme',
     links: [
       {
@@ -143,7 +144,7 @@ export function HeaderMenu() {
   const [opened, { toggle }] = useDisclosure(false);
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
-      <Menu.Item icon={item.icon} key={item.link}>{item.label}</Menu.Item>
+      <Menu.Item component={Link} to='/cuisine' icon={item.icon} key={item.link}>{item.label}</Menu.Item>
     ));
 
     if (menuItems) {
@@ -167,17 +168,17 @@ export function HeaderMenu() {
     }
 
     return (
-      <a
+      <Text
+        component={Link}
         key={link.label}
-        href={link.link}
+        to='/'
         className={classes.link}
-        onClick={(event) => event.preventDefault()}
       >
         <Center>
           <span className={classes.linkLabel}>{link.label}</span>
           <IconHome size={15} stroke={2} />
         </Center>
-      </a>
+      </Text>
     );
   });
 

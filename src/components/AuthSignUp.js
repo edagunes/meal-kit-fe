@@ -25,9 +25,6 @@ import {
                 <TextInput label="Email" placeholder="you@gmail.com" required />
                 <PasswordInput label="Şifre" placeholder="Şifreniz" required mt="md" />
                 <PasswordInput label="Şifre Tekrarı" placeholder="Şifreniz" required mt="md" />
-                <Group position="apart" mt="lg">
-                    <Checkbox label="Beni hatırla" sx={{ lineHeight: 1 }} />
-                </Group>
                 <Button fullWidth mt="xl">
                     Kayıt ol
                 </Button>

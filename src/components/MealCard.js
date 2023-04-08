@@ -49,7 +49,13 @@ const mockdata = [
             label: '#vegan'
         },
         {
-            label: '#vejetaryen'
+             label: '#vejetaryen'
+        },
+        {
+             label: '#Ketojenik'
+        },
+        {
+             label: '#Laktozsuz'
         }
       ]
     },
