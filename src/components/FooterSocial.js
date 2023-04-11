@@ -1,6 +1,5 @@
 import { createStyles, Container, Group, ActionIcon } from '@mantine/core';
-import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
-import { MantineLogo } from '@mantine/ds';
+import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram, IconChefHat } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   footer: {
@@ -35,7 +34,7 @@ export function FooterSocial() {
   return (
     <div className={classes.footer}>
       <Container className={classes.inner}>
-        <MantineLogo size={28} />
+        <IconChefHat color="teal" size={28} />
         <Group spacing={0} className={classes.links} position="right" noWrap>
           <ActionIcon size="lg">
             <IconBrandTwitter size={18} stroke={1.5} />
