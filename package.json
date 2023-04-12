@@ -8,7 +8,7 @@
     "@mantine/core": "^5.10.3",
     "@mantine/ds": "^5.10.3",
     "@mantine/form": "^5.10.3",
-    "@mantine/hooks": "^5.10.3",
+    "@mantine/hooks": "^5.10.5",
     "@tabler/icons": "^2.2.0",
     "@tabler/icons-react": "^2.2.0",
     "@testing-library/jest-dom": "^5.16.5",

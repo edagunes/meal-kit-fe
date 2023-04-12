@@ -6,7 +6,6 @@ import {
     Anchor,
     Paper,
     Title,
-    Text,
     Container,
     Group,
     Button,

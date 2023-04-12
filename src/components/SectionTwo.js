@@ -3,8 +3,6 @@ import {
     Image,
     Container,
     Title,
-    Button,
-    Group,
     Col,
     Grid,
     List,

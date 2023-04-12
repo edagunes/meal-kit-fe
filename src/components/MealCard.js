@@ -1,5 +1,6 @@
-import { IconHeart } from '@tabler/icons-react';
-import { Card, Image, Text, Group, Badge, Button, ActionIcon, Container, SimpleGrid, createStyles } from '@mantine/core';
+import { Card, Image, Text, Group, Badge, Button, Container, SimpleGrid, createStyles } from '@mantine/core';
+import { MealDetail } from './MealDetail';
+import { useDisclosure } from '@mantine/hooks';
 
 const useStyles = createStyles((theme) => ({
   card: {
@@ -92,6 +93,7 @@ const mockdata = [
   ];
 
 export function MealCard() {
+  const [opened, {close, open}] = useDisclosure(false)
   const { classes, theme } = useStyles();
 
   const cards = mockdata.map((card) => {
@@ -124,7 +126,7 @@ export function MealCard() {
     
           <Card.Section className={classes.section}>
             <Text mt="md" className={classes.label} color="dimmed">
-              Perfect for you, if you want:
+              SENİN İÇİN MÜKEMMEL, EĞER İSTİYORSAN:
             </Text>
             <Group spacing={7} mt={5}>
               {cardItems}
@@ -132,8 +134,8 @@ export function MealCard() {
           </Card.Section>
     
           <Group mt="xs">
-            <Button radius="md" style={{ flex: 1 }}>
-              Show details
+            <Button onClick={open} color="teal" radius="md" style={{ flex: 1 }}>
+              Detay
             </Button>
           </Group>
         </Card>
@@ -145,6 +147,13 @@ export function MealCard() {
       <SimpleGrid cols={3} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
         {cards}
       </SimpleGrid>
+      <MealDetail
+        open={open}
+        opened={opened}
+        close={close}
+        card={cards}
+      />
     </Container>
   );
 }
+

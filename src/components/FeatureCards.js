@@ -74,7 +74,7 @@ import {
   }));
   
   export function FeaturesCards() {
-    const { classes, theme } = useStyles();
+    const { classes } = useStyles();
     const features = mockdata.map((feature) => (
       <Card key={feature.title} shadow="md" radius="md" className={classes.card} padding="xl">
         <feature.icon size={'50px'} stroke={2} color="teal" />

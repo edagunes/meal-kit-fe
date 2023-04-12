@@ -5,7 +5,6 @@ import {
     Title,
     Button,
     Group,
-    Text,
     List,
     ThemeIcon
   } from '@mantine/core';
