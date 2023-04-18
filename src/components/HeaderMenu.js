@@ -18,6 +18,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { IconHome, IconChevronDown, IconPlant, IconDropCircle, IconBreadOff, IconMilkOff, IconCarrot, } from '@tabler/icons-react';
 import { useState } from 'react';
 import mainLogo from '../logo.png'
+import { Cart } from './Cart';
 
 const HEADER_HEIGHT = 80;
 
@@ -140,7 +141,7 @@ const links = [
 export function HeaderMenu() {
   const [ isAut, setIsAut ] = useState(true)
   const [ drawerOpen, setDrawerOpen] = useState(false);
-  const { classes, theme } = useStyles();
+  const { classes } = useStyles();
   const [opened, { toggle }] = useDisclosure(false);
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
@@ -206,12 +207,12 @@ export function HeaderMenu() {
       <Drawer
         opened={drawerOpen}
         onClose={() => setDrawerOpen(false)}
-        title="Register"
-        padding="lg"
-        size="lg"
+        title="Sepet"
+        padding="md"
+        size={700}
         position="right"
       >
-        {/* Drawer content */}
+        <Cart/>
       </Drawer>
     </Header>
   );
