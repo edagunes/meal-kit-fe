@@ -110,7 +110,7 @@ const links = [
     label: 'Özel Beslenme',
     links: [
       {
-        link: 1,
+        link: 5,
         label: 'Glutensiz',
         icon: <IconBreadOff size={14} />
       },
@@ -130,7 +130,7 @@ const links = [
         icon: <IconPlant size={14} />
       },
       {
-        link: 5,
+        link: 1,
         label: 'Vejetaryen',
         icon: <IconCarrot size={14} />
       }
@@ -139,7 +139,7 @@ const links = [
 ]
 
 export function HeaderMenu() {
-  const [ isAut, setIsAut ] = useState(true)
+  const [ isAut, setIsAut ] = useState(false)
   const [ drawerOpen, setDrawerOpen] = useState(false);
   const { classes } = useStyles();
   const [opened, { toggle }] = useDisclosure(false);
@@ -193,13 +193,13 @@ export function HeaderMenu() {
         </Group>
         { !isAut && 
           <Group>
-            <Button component="a" rel="noopener noreferrer" href="/login" color="teal" variant="light">Log in</Button>
-            <Button component="a" rel="noopener noreferrer" href="/signup" color="teal" >Sign up</Button>
+            <Button component="a" rel="noopener noreferrer" href="/login" color="teal" variant="light">Giriş</Button>
+            <Button component="a" rel="noopener noreferrer" href="/signup" color="teal" >Kayıt Ol</Button>
           </Group>
         }
         { isAut &&
           <Group>
-            <Avatar color="green" />
+            <Button color="red">Çıkış</Button>
             <Button onClick={() => setDrawerOpen(true)} color="teal">Sepet</Button>
           </Group>
         }
