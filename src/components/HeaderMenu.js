@@ -1,5 +1,4 @@
-
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import {
   createStyles,
   Menu,
@@ -12,48 +11,63 @@ import {
   Image,
   Text,
   Avatar,
-  Drawer
-} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconHome, IconChevronDown, IconPlant, IconDropCircle, IconBreadOff, IconMilkOff, IconCarrot, } from '@tabler/icons-react';
-import { useState } from 'react';
-import mainLogo from '../logo.png'
-import { Cart } from './Cart';
+  Drawer,
+} from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+import {
+  IconHome,
+  IconChevronDown,
+  IconPlant,
+  IconDropCircle,
+  IconBreadOff,
+  IconMilkOff,
+  IconCarrot,
+} from "@tabler/icons-react";
+import { useState, useEffect } from "react";
+import mainLogo from "../logo.png";
+import { Cart } from "./Cart";
+import { getTags } from "../apiCall/CallApi";
 
 const HEADER_HEIGHT = 80;
 
 const useStyles = createStyles((theme) => ({
   inner: {
     height: HEADER_HEIGHT,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 
   links: {
-    [theme.fn.smallerThan('sm')]: {
-      display: 'none',
+    [theme.fn.smallerThan("sm")]: {
+      display: "none",
     },
   },
 
   burger: {
-    [theme.fn.largerThan('sm')]: {
-      display: 'none',
+    [theme.fn.largerThan("sm")]: {
+      display: "none",
     },
   },
 
   link: {
-    display: 'block',
+    display: "block",
     lineHeight: 1,
-    padding: '8px 12px',
+    padding: "8px 12px",
     borderRadius: theme.radius.sm,
-    textDecoration: 'none',
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
+    textDecoration: "none",
+    color:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[0]
+        : theme.colors.gray[7],
     fontSize: theme.fontSizes.sm,
     fontWeight: 500,
 
-    '&:hover': {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+    "&:hover": {
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[6]
+          : theme.colors.gray[0],
     },
   },
 
@@ -62,90 +76,47 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const links = [
-  {
-    link: '/',
-    label: 'Anasayfa'
-  },
-  {
-    link: '/cuisine',
-    label: 'Mutfaklar',
-    links: [
-      {
-        link: 3,
-        label: 'Avrupa Mutfağı'
-      },
-      {
-        link: 4,
-        label: 'Güney Amerika Mutfağı'
-      },
-      {
-        link: 5,
-        label: 'Güney Asya Mutfağı'
-      },
-      {
-        link: 6,
-        label: 'İtalya Mutfağı'
-      },
-      {
-        link: 7,
-        label: 'Kuzey Amerika Mutfağı'
-      },
-      {
-        link: 8,
-        label: 'Meksika Mutfağı'
-      },
-      {
-        link: 9,
-        label: 'Türk Mutfağı'
-      },
-      {
-        link: 10,
-        label: 'Uzak Doğu Mutfağı'
-      }
-    ]
-  },
-  {
-    link: '/cuisine',
-    label: 'Özel Beslenme',
-    links: [
-      {
-        link: 5,
-        label: 'Glutensiz',
-        icon: <IconBreadOff size={14} />
-      },
-      {
-        link: 2,
-        label: 'Ketojenik',
-        icon: <IconDropCircle size={14} />
-      },
-      {
-        link: 3,
-        label: 'Laktozsuz',
-        icon: <IconMilkOff size={14} />
-      },
-      {
-        link: 4,
-        label: 'Vegan',
-        icon: <IconPlant size={14} />
-      },
-      {
-        link: 1,
-        label: 'Vejetaryen',
-        icon: <IconCarrot size={14} />
-      }
-    ]
-  }
-]
-
 export function HeaderMenu() {
-  const [ isAut, setIsAut ] = useState(false)
-  const [ drawerOpen, setDrawerOpen] = useState(false);
+  const [isAut, setIsAut] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [tagData, setTagData] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        let response = await getTags();
+        // let data = response.json();
+        setTagData(response);
+        console.log(response);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    })();
+  }, []);
+
+  const links = [
+    {
+      link: "/",
+      label: "Anasayfa",
+    },
+    {
+      link: "/cuisine",
+      label: "Kategoriler",
+      links: tagData.map((tag) => {
+        return {
+          link: tag.id,
+          label: tag.name,
+        };
+      }),
+    },
+  ];
   const { classes } = useStyles();
   const [opened, { toggle }] = useDisclosure(false);
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
-      <Menu.Item component={Link} to='/cuisine' icon={item.icon} key={item.link}>{item.label}</Menu.Item>
+      <Menu.Item component={Link} to={`/cuisine/${item.link}`} key={item.link}>
+        {item.label}
+      </Menu.Item>
     ));
 
     if (menuItems) {
@@ -169,14 +140,9 @@ export function HeaderMenu() {
     }
 
     return (
-      <Text
-        component={Link}
-        key={link.label}
-        to='/'
-        className={classes.link}
-      >
+      <Text component={Link} to="/" className={classes.link}>
         <Center>
-          <span className={classes.linkLabel}>{link.label}</span>
+          <span className={classes.linkLabel}>{"Anasayfa"}</span>
           <IconHome size={15} stroke={2} />
         </Center>
       </Text>
@@ -186,23 +152,45 @@ export function HeaderMenu() {
   return (
     <Header height={HEADER_HEIGHT} sx={{ borderBottom: 0 }} mb={1}>
       <Container className={classes.inner} fluid>
-          <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
-          <Image src={mainLogo} style={{ width: "115px", height: "30px" }} />
+        <Burger
+          opened={opened}
+          onClick={toggle}
+          className={classes.burger}
+          size="sm"
+        />
+        <Image src={mainLogo} style={{ width: "115px", height: "30px" }} />
         <Group spacing={5} className={classes.links}>
           {items}
         </Group>
-        { !isAut && 
+        {!isAut && (
           <Group>
-            <Button component="a" rel="noopener noreferrer" href="/login" color="teal" variant="light">Giriş</Button>
-            <Button component="a" rel="noopener noreferrer" href="/signup" color="teal" >Kayıt Ol</Button>
+            <Button
+              component="a"
+              rel="noopener noreferrer"
+              href="/login"
+              color="teal"
+              variant="light"
+            >
+              Giriş
+            </Button>
+            <Button
+              component="a"
+              rel="noopener noreferrer"
+              href="/signup"
+              color="teal"
+            >
+              Kayıt Ol
+            </Button>
           </Group>
-        }
-        { isAut &&
+        )}
+        {isAut && (
           <Group>
             <Button color="red">Çıkış</Button>
-            <Button onClick={() => setDrawerOpen(true)} color="teal">Sepet</Button>
+            <Button onClick={() => setDrawerOpen(true)} color="teal">
+              Sepet
+            </Button>
           </Group>
-        }
+        )}
       </Container>
       <Drawer
         opened={drawerOpen}
@@ -212,7 +200,7 @@ export function HeaderMenu() {
         size={700}
         position="right"
       >
-        <Cart/>
+        <Cart />
       </Drawer>
     </Header>
   );
