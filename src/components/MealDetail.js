@@ -80,7 +80,15 @@ export function MealDetail(
             </Card.Section>
             <Card.Section className={classes.section} mt="md">
                 <Text fz="lg" fw={500}>
-                    Description
+                    Açıklama
+                </Text>
+                <Text fz="md" fw={400}>
+                It's not a coincidence that bistec sounds like best steak because this will be the best sliced steak sandwich you'll ever put together. You can show off your skills in the kitchen with this Culinary Collection of melty cheese, crispy fries, and tender savory steak all on one plate. Your friends and family will be full and impressed.
+                </Text>
+            </Card.Section>
+            <Card.Section className={classes.section} mt="sm">
+                <Text fz="lg" fw={500}>
+                    İçindekiler
                 </Text>
                 <Text fz="md" fw={400}>
                 It's not a coincidence that bistec sounds like best steak because this will be the best sliced steak sandwich you'll ever put together. You can show off your skills in the kitchen with this Culinary Collection of melty cheese, crispy fries, and tender savory steak all on one plate. Your friends and family will be full and impressed.
