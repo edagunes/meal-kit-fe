@@ -1,8 +1,10 @@
 const URL = "http://localhost:";
-const PORT = "8085/api";
-const PRODUCT_ENDPOINT = "/product";
-const TAG_ENDPOINT = "/tag";
-const BUSINESS_ENDPOINT = "/business";
+const PORT = "8085";
+const ORDER_PORT = "8090";
+const ORDER_ENDPOINT = "/api/v1";
+const PRODUCT_ENDPOINT = "/api/product";
+const TAG_ENDPOINT = "/api/tag";
+const BUSINESS_ENDPOINT = "/api/business";
 
 export const getProductById = async (productId) => {
   try {
@@ -102,6 +104,25 @@ export const businessGetProductById = async (productId) => {
   try {
     const response = await fetch(
       `${URL}${PORT}${BUSINESS_ENDPOINT}/getProductById/${productId}`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error:", error);
+    throw error;
+  }
+};
+export const placeOrder = async (products) => {
+  try {
+    const response = await fetch(
+      `${URL}${ORDER_PORT}${ORDER_ENDPOINT}/placeOrder`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(products),
+      }
     );
     const data = await response.json();
     return data;

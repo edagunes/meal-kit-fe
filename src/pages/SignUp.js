@@ -1,15 +1,13 @@
 import { AuthSignUp } from "../components/AuthSignUp";
-import { FooterSocial } from "../components/FooterSocial"
-import { HeaderMenu } from "../components/HeaderMenu"
+import { FooterSocial } from "../components/FooterSocial";
+import { HeaderMenu } from "../components/HeaderMenu";
 
 const SignUp = () => {
-    return(
-        <>
-            <HeaderMenu />
-            <AuthSignUp />
-            <FooterSocial />
-        </>
-    )
-}
+  return (
+    <>
+      <AuthSignUp />
+    </>
+  );
+};
 
 export default SignUp;

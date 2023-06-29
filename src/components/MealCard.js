@@ -47,6 +47,8 @@ export function MealCard({
   difficulty,
   ingredients,
   tagIds,
+  cart,
+  setCart,
 }) {
   const [opened, { close, open }] = useDisclosure(false);
   const { classes, theme } = useStyles();
@@ -105,7 +107,14 @@ export function MealCard({
           </Button>
         </Group>
       </Card>
-      <MealDetail open={open} opened={opened} close={close} id={id} />
+      <MealDetail
+        open={open}
+        opened={opened}
+        close={close}
+        id={id}
+        cart={cart}
+        setCart={setCart}
+      />
     </>
   );
 }

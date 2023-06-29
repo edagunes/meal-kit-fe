@@ -1,11 +1,9 @@
-import { FooterSocial } from "../components/FooterSocial";
-import { HeaderMenu } from "../components/HeaderMenu";
 import { MealCard } from "../components/MealCard";
 import { useParams } from "react-router-dom";
 import { getProductsByTag } from "../apiCall/CallApi";
 import { useState, useEffect } from "react";
 import { Container, SimpleGrid } from "@mantine/core";
-const Cuisine = () => {
+const Cuisine = ({ cart, setCart }) => {
   const { tagId } = useParams();
   const tagArr = [tagId];
 
@@ -14,7 +12,6 @@ const Cuisine = () => {
     (async () => {
       try {
         let response = await getProductsByTag(tagArr);
-        // let data = response.json();
         setProductData(response);
         console.log(response);
       } catch (error) {
@@ -25,7 +22,6 @@ const Cuisine = () => {
 
   return (
     <>
-      <HeaderMenu />
       <Container size="lg" py="xl">
         <SimpleGrid cols={3} breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
           {productData.map((product) => {
@@ -42,13 +38,13 @@ const Cuisine = () => {
                 difficulty={product.difficulty}
                 ingredients={product.ingredients}
                 tagIds={product.tagIds}
+                cart={cart}
+                setCart={setCart}
               />
             );
           })}
         </SimpleGrid>
       </Container>
-
-      <FooterSocial />
     </>
   );
 };

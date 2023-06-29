@@ -59,7 +59,7 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function MealDetail({ close, opened, id }) {
+export function MealDetail({ close, opened, id, cart, setCart }) {
   const { classes } = useStyles();
   const [numberValue, setNumberValue] = useState(1);
   const handlers = useRef();
@@ -112,6 +112,11 @@ export function MealDetail({ close, opened, id }) {
       </Text>
     </Card.Section>
   ));
+
+  const handleAddToCart = () => {
+    console.log(product);
+    setCart([...cart, product]);
+  };
 
   return (
     <Modal opened={opened} onClose={close} size="xl" withCloseButton={false}>
@@ -179,7 +184,12 @@ export function MealDetail({ close, opened, id }) {
               +
             </ActionIcon>
           </Group>
-          <Button radius="sm" color="teal" style={{ flex: 1 }}>
+          <Button
+            onClick={handleAddToCart}
+            radius="sm"
+            color="teal"
+            style={{ flex: 1 }}
+          >
             Sepete Ekle
           </Button>
         </Group>

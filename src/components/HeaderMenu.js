@@ -14,15 +14,7 @@ import {
   Drawer,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import {
-  IconHome,
-  IconChevronDown,
-  IconPlant,
-  IconDropCircle,
-  IconBreadOff,
-  IconMilkOff,
-  IconCarrot,
-} from "@tabler/icons-react";
+import { IconHome, IconChevronDown } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 import mainLogo from "../logo.png";
 import { Cart } from "./Cart";
@@ -76,8 +68,8 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function HeaderMenu() {
-  const [isAut, setIsAut] = useState(false);
+export function HeaderMenu({ cart, setCart }) {
+  const [isAut, setIsAut] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [tagData, setTagData] = useState([]);
 
@@ -85,7 +77,6 @@ export function HeaderMenu() {
     (async () => {
       try {
         let response = await getTags();
-        // let data = response.json();
         setTagData(response);
         console.log(response);
       } catch (error) {
@@ -114,14 +105,18 @@ export function HeaderMenu() {
   const [opened, { toggle }] = useDisclosure(false);
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
-      <Menu.Item component={Link} to={`/cuisine/${item.link}`} key={item.link}>
-        {item.label}
-      </Menu.Item>
+      // component={Link} to={`/cuisine/${item.link}`}
+      <Menu.Item key={item.link}>{item.label}</Menu.Item>
     ));
 
     if (menuItems) {
       return (
-        <Menu key={link.label} trigger="hover" exitTransitionDuration={0}>
+        <Menu
+          key={link.label}
+          trigger="hover"
+          transitionProps={{ exitDuration: 0 }}
+          withinPortal
+        >
           <Menu.Target>
             <a
               href={link.link}
@@ -130,7 +125,7 @@ export function HeaderMenu() {
             >
               <Center>
                 <span className={classes.linkLabel}>{link.label}</span>
-                <IconChevronDown size={12} stroke={1.5} />
+                <IconChevronDown size="0.9rem" stroke={1.5} />
               </Center>
             </a>
           </Menu.Target>
@@ -140,7 +135,8 @@ export function HeaderMenu() {
     }
 
     return (
-      <Text component={Link} to="/" className={classes.link}>
+      //component={Link} to="/"
+      <Text className={classes.link}>
         <Center>
           <span className={classes.linkLabel}>{"Anasayfa"}</span>
           <IconHome size={15} stroke={2} />
@@ -200,7 +196,7 @@ export function HeaderMenu() {
         size={700}
         position="right"
       >
-        <Cart />
+        <Cart cart={cart} setCart={setCart} />
       </Drawer>
     </Header>
   );

@@ -5,9 +5,7 @@ import { HeaderMenu } from "../components/HeaderMenu"
 const Login = () => {
     return(
         <>
-            <HeaderMenu />
             <AuthLogin />
-            <FooterSocial />
         </>
     )
 }
