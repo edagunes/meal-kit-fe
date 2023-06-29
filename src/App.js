@@ -12,8 +12,8 @@ function App() {
   const [cart, setCart] = useState([]);
   return (
     <>
-      <HeaderMenu cart={cart} setCart={setCart} />
       <BrowserRouter>
+        <HeaderMenu cart={cart} setCart={setCart} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />

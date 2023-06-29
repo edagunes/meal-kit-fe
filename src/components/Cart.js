@@ -45,7 +45,7 @@ export function Cart({ cart, setCart }) {
               <Avatar size="xl" src={item.imageUrl} />
               <div>
                 <Text fz="sm" fw={500}>
-                  {item.name}
+                  {item.productName}
                 </Text>
               </div>
             </Group>
@@ -87,7 +87,7 @@ export function Cart({ cart, setCart }) {
             ingredientList: item.ingredients.map((ingredient) => {
               return {
                 id: ingredient.id,
-                count: ingredient.id,
+                count: ingredient.count,
               };
             }),
           };

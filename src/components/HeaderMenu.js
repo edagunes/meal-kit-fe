@@ -105,8 +105,9 @@ export function HeaderMenu({ cart, setCart }) {
   const [opened, { toggle }] = useDisclosure(false);
   const items = links.map((link) => {
     const menuItems = link.links?.map((item) => (
-      // component={Link} to={`/cuisine/${item.link}`}
-      <Menu.Item key={item.link}>{item.label}</Menu.Item>
+      <Menu.Item component={Link} to={`/cuisine/${item.link}`} key={item.link}>
+        {item.label}
+      </Menu.Item>
     ));
 
     if (menuItems) {
@@ -135,8 +136,7 @@ export function HeaderMenu({ cart, setCart }) {
     }
 
     return (
-      //component={Link} to="/"
-      <Text className={classes.link}>
+      <Text component={Link} to="/" className={classes.link}>
         <Center>
           <span className={classes.linkLabel}>{"Anasayfa"}</span>
           <IconHome size={15} stroke={2} />
